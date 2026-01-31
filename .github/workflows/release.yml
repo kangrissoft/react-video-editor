@@ -3,6 +3,12 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name for release (e.g. v1.0.1)'
+        required: true
+        default: 'v0.0.0-manual'
 
 jobs:
   release:
@@ -42,8 +48,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: 'App ${{ github.ref_name }}'
+          tagName: ${{ github.event.inputs.tag_name || github.ref_name }}
+          releaseName: 'App ${{ github.event.inputs.tag_name || github.ref_name }}'
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: true
           prerelease: false
