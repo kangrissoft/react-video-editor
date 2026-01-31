@@ -9,7 +9,7 @@ import {
   TouchEvent
 } from "react";
 
-import Markers from "./Markers";
+import Markers from "./markers";
 import { css } from "@emotion/react";
 import { getGradient } from "../utils";
 import { arraysEqual, shallowEqual } from "../helper";
